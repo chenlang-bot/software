@@ -1,0 +1,32 @@
+@startuml
+left to right direction
+actor "数据库" as database
+actor "社区用户" as user
+actor "管理员" as administrator
+
+rectangle "社区用户管理系统" {
+    usecase "用户信息录入" as UseCase1
+    usecase "游戏内容录入" as UseCase2
+    usecase "个人信息" as UseCase3
+    usecase "个人展示" as UseCase4
+    usecase "游戏内容" as UseCase5
+    usecase "社区用户管理" as UseCase6
+    usecase "搜索板块" as UseCase7
+    usecase "游戏库存" as UseCase8
+}
+
+database --> UseCase1
+database --> UseCase2
+database --> UseCase5
+database --> UseCase7
+
+user --> UseCase3
+user --> UseCase4
+user --> UseCase8
+
+administrator --> UseCase6
+administrator --> UseCase5
+
+UseCase2 <|-- UseCase7 : 搜索调动数据库内容
+UseCase8 <|.. UseCase5 : 添加至用户游戏库
+@enduml
