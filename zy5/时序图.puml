@@ -1,0 +1,21 @@
+@startuml
+title 用户登录注册社区相关操作时序图
+
+participant 登录注册 as DLZC
+participant 用户 as Employee
+participant 账户数据库 as Department
+participant 社区 as Position
+
+DLZC -> Employee: 登录/注册/验证
+DLZC -> Department: 调动用户数据库验证身份
+Department -> Department: 验证是否登录注册账户正确
+Department -> DLZC: 反馈账户验证情况（正确/错误）
+DLZC -> Employee: 根据反馈通知用户进入社区（若账户无误）
+Employee -> Department: 注册账户录入数据库
+Department -> Department: 将用户添加到账户列表
+Department -> Position: 申请为玩家链接跳转到游戏社区
+Position -> Position: 检查游戏社区展示内容是否正确/合规
+Position -> Department: 反馈当前社区在线人员是否负载
+Department -> Employee: 根据反馈通知玩家能否进入游戏社区
+
+@enduml
